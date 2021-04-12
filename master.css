@@ -40,7 +40,7 @@ body {
   font-weight: bold;
 }
 
-#results {
+#results .movies {
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
