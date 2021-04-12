@@ -26,23 +26,26 @@
         <div id="results">
           <div class="card" v-for="result in searchResults">
             <div>
-              <span>Titolo: </span>
+              <span>Titolo:</span>
               <span>{{result.title}}</span>
             </div>
             <div>
-              <span>Titolo originale: </span>
+              <span>Titolo originale:</span>
               <span>{{result.original_title}}</span>
             </div>
-            <div>
-              <span>Lingua: </span>
-              <span>{{result.original_language}}</span>
+            <div class="language">
+              <span>Lingua:</span>
+              <img :src="`./img/${result.original_language}.png`"
+              v-if="flags.includes(result.original_language)"
+              alt="language flag">
+              <span v-else>{{result.original_language}}</span>
             </div>
             <div>
-              <span>Voto: </span>
+              <span>Voto:</span>
               <span>{{result.vote_average}}</span>
             </div>
           </div>
-          <div class="message" v-if="noResults">
+          <div class="message" :class="(noResults) ? 'show' : 'hide'">
             There are no movies that matched your query.
           </div>
         </div>

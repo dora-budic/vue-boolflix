@@ -5,8 +5,9 @@ var app = new Vue({
   data: {
     searchInput: '',
     searchResults: [],
-    noResults: false
-  },
+    noResults: false,
+    flags: ['de', 'en', 'es', 'fr', 'hr', 'it', 'pt', 'ru', 'zh'],
+},
   methods: {
     getResults: function () {
       if (this.searchInput != '') {

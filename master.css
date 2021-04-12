@@ -52,7 +52,7 @@ body {
   padding: 30px;
   margin: 0 10px 30px;
   border-radius: 10px;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.8);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -61,15 +61,35 @@ body {
 
 #results .card > div {
   margin: 5px 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #results .card > div > span:first-child {
   font-weight: bold;
+  margin-right: 5px;
+}
+
+#results .card div.language {
+  display: flex;
+  align-items: center;
+}
+
+#results .card div.language img {
+  width: 30px;
+  margin-left: 5px;
 }
 
 #results .message {
   width: 100%;
   font-size: 24px;
   text-align: center;
+  color: #808080;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
