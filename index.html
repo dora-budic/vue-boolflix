@@ -15,7 +15,8 @@
       <header>
         <div id="searchbar">
           <input type="text" name="search" placeholder="Search for a movie, tv show, person..."
-          v-model="searchInput">
+          v-model="searchInput"
+          @keyup.enter="getResults">
           <button type="button" name="send"
           @click="getResults">Search</button>
         </div>
@@ -40,6 +41,9 @@
               <span>Voto: </span>
               <span>{{result.vote_average}}</span>
             </div>
+          </div>
+          <div class="message" v-if="noResults">
+            There are no movies that matched your query.
           </div>
         </div>
       </main>
