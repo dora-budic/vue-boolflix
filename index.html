@@ -5,11 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue Boolflix</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./master.css">
   </head>
-  
+
   <body>
     <div id="root">
+      <header>
+        <div id="searchbar">
+          <input type="text" name="search" placeholder="Search for a movie, tv show, person..."
+          v-model="searchInput">
+          <button type="button" name="send"
+          @click="getResults">Search</button>
+        </div>
+      </header>
+
+      <main>
+        <div id="results">
+          <div class="card" v-for="result in searchResults">
+            <div>
+              <span>Titolo: </span>
+              <span>{{result.title}}</span>
+            </div>
+            <div>
+              <span>Titolo originale: </span>
+              <span>{{result.original_title}}</span>
+            </div>
+            <div>
+              <span>Lingua: </span>
+              <span>{{result.original_language}}</span>
+            </div>
+            <div>
+              <span>Voto: </span>
+              <span>{{result.vote_average}}</span>
+            </div>
+          </div>
+        </div>
+      </main>
 
     </div>
 

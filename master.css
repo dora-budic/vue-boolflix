@@ -3,3 +3,67 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#searchbar {
+  background-color: #02688E;
+  height: 80px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchbar input {
+  width: 500px;
+  padding: 10px 26px;
+  border-radius: 30px;
+  border: 0;
+  outline: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+#searchbar button {
+  font-family: 'Source Sans Pro', sans-serif;
+  background-image: linear-gradient(to right, #1ed5a9, #00cfc0, #00c7d3, #00bedf, #01b4e4);
+  padding: 10px 26px;
+  border-radius: 30px;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px;
+}
+
+#results .card {
+  width: calc(100% / 4 - 20px);
+  height: 300px;
+  padding: 30px;
+  margin: 0 10px 30px;
+  border-radius: 10px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#results .card > div {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+#results .card > div > span:first-child {
+  font-weight: bold;
+}
