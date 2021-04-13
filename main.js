@@ -53,7 +53,7 @@ var app = new Vue({
       }
     },
     getOriginalTitle: function (object) {
-      if (object.title) {
+      if (object.original_title) {
         return object.original_title;
       } else {
         return object.original_name;

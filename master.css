@@ -8,17 +8,24 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-#searchbar {
-  background-color: #02688E;
+header {
+  background-color: #0C0B0C;
   height: 80px;
   padding: 30px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
+header h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 50px;
+  color: #E50914;
+}
+
+
 #searchbar input {
-  width: 500px;
+  width: 400px;
   padding: 10px 26px;
   border-radius: 30px;
   border: 0;
@@ -30,7 +37,7 @@ body {
 
 #searchbar button {
   font-family: 'Source Sans Pro', sans-serif;
-  background-image: linear-gradient(to right, #1ed5a9, #00cfc0, #00c7d3, #00bedf, #01b4e4);
+  background-color: #E50914;
   padding: 10px 26px;
   border-radius: 30px;
   border: 0;
@@ -40,41 +47,67 @@ body {
   font-weight: bold;
 }
 
-#results .movies {
+#results {
+  background-color: #151315;
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-wrap: wrap;
-  padding: 50px;
+  justify-content: center;
+  padding: 60px 15px;
 }
 
 #results .card {
-  width: calc(100% / 4 - 20px);
-  height: 300px;
-  padding: 30px;
   margin: 0 10px 30px;
   border-radius: 10px;
-  background-color: rgba(0,0,0,0.8);
   color: #fff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-basis: 200px;
+  position: relative;
 }
 
-#results .card > div {
+#results .card .poster img {
+  width: 100%;
+}
+
+#results .card .poster-placeholder {
+  display: none;
+}
+
+#results .card .info {
+  background-color: rgba(0,0,0,0.8);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+  display: none;
+}
+
+#results .card:hover .info {
+  display: flex;
+}
+
+#results .card .info > div {
   margin: 5px 0;
   font-size: 16px;
 }
 
-#results .card > div > span:first-child {
+#results .card .info > div > span:first-child {
   font-weight: bold;
   margin-right: 5px;
 }
 
-#results .card div.language {
+#results .card .info div.language {
   display: flex;
   align-items: center;
 }
 
-#results .card div.language img {
+#results .card .info div.language img {
   width: 30px;
   margin-left: 5px;
 }
