@@ -28,10 +28,9 @@
       <main>
         <div id="results">
           <div class="card" v-for="result in searchResults">
-            <div class="poster">
-              <img :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`" alt="poster"
-              @error="hideImage">
-              <img class="poster-placeholder" src="./img/placeholder.png" alt="poster">
+            <div class="poster"
+            :style="`background-image:url('${changePoster(result)}')`">
+            </div>
             <div class="info">
               <div>
                 <span>Titolo:</span>
@@ -54,6 +53,10 @@
                   <i class="fas fa-star" v-for="vote in vote(result)"></i>
                   <i class="far fa-star" v-for="vote in (5 - vote(result))"></i>
                 </span>
+              </div>
+              <div class="overview" v-if="result.overview">
+                <span>Overview:</span>
+                <span>{{result.overview}}</span>
               </div>
             </div>
           </div>

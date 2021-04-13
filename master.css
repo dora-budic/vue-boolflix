@@ -58,15 +58,18 @@ header h1 {
 
 #results .card {
   margin: 0 10px 30px;
-  border-radius: 10px;
   color: #fff;
   display: flex;
-  flex-basis: 200px;
+  flex-basis: 250px;
   position: relative;
 }
 
-#results .card .poster img {
+#results .card .poster {
   width: 100%;
+  padding-top: 150%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #results .card .poster-placeholder {
@@ -84,7 +87,7 @@ header h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 0 30px;
+  padding: 10px 20px;
   display: none;
 }
 
@@ -115,6 +118,18 @@ header h1 {
 #results .card .info i.fa-star {
   font-style: 14px;
   color: #F1D405;
+}
+
+#results .card .info div.overview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+   -webkit-line-clamp: 4;
+   -webkit-box-orient: vertical;
+}
+
+#results .card .info div.overview span:last-child {
+  font-size: 14px;
 }
 
 #results .message {

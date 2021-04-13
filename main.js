@@ -71,7 +71,14 @@ var app = new Vue({
       } else {
         return 5;
       }
-
+    },
+    changePoster: function (object) {
+      if (object.poster_path) {
+        return `https://image.tmdb.org/t/p/w342${object.poster_path}`;
+      } else {
+        return './img/placeholder.png';
+      }
     }
   },
+
 });
