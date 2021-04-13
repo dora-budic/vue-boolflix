@@ -50,7 +50,10 @@
               </div>
               <div>
                 <span>Voto:</span>
-                <span>{{result.vote_average}}</span>
+                <span>
+                  <i class="fas fa-star" v-for="vote in vote(result)"></i>
+                  <i class="far fa-star" v-for="vote in (5 - vote(result))"></i>
+                </span>
               </div>
             </div>
           </div>

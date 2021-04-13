@@ -112,6 +112,11 @@ header h1 {
   margin-left: 5px;
 }
 
+#results .card .info i.fa-star {
+  font-style: 14px;
+  color: #F1D405;
+}
+
 #results .message {
   width: 100%;
   font-size: 24px;

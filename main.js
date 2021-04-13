@@ -58,6 +58,20 @@ var app = new Vue({
       } else {
         return object.original_name;
       }
+    },
+    vote: function (object) {
+      if (object.vote_average <= 2) {
+        return 1;
+      } else if (object.vote_average >= 2 && object.vote_average <= 4) {
+        return 2;
+      } else if (object.vote_average >= 4 && object.vote_average <= 6){
+        return 3;
+      } else if (object.vote_average >= 6 && object.vote_average <= 8) {
+        return 4;
+      } else {
+        return 5;
+      }
+
     }
   },
 });
