@@ -25,7 +25,7 @@ header h1 {
 
 
 #searchbar input {
-  width: 400px;
+  width: 330px;
   padding: 10px 26px;
   border-radius: 30px;
   border: 0;
@@ -54,13 +54,15 @@ header h1 {
   flex-wrap: wrap;
   justify-content: center;
   padding: 60px 15px;
+  position: relative;
 }
 
 #results .card {
   margin: 0 10px 30px;
   color: #fff;
   display: flex;
-  flex-basis: 250px;
+  flex-basis: 230px;
+  max-height: 345px;
   position: relative;
 }
 
@@ -70,10 +72,6 @@ header h1 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-#results .card .poster-placeholder {
-  display: none;
 }
 
 #results .card .info {
@@ -137,6 +135,24 @@ header h1 {
   font-size: 24px;
   text-align: center;
   color: #808080;
+}
+
+#big-card {
+  width: 80%;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #0C0B0C;
+  border-radius: 10px;
+  color: #fff;
+  padding: 40px;
+}
+
+#big-card i {
+  color: #E50914;
+  font-size: 40px;
 }
 
 .show {

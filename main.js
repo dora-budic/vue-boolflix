@@ -11,8 +11,16 @@ var app = new Vue({
     tvResults: [],
     searchResults: [],
     noResults: false,
-
-},
+    cast: [],
+    genres: [],
+    cardGenres: []
+  },
+  mounted () {
+    axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
+      .then((response) => {
+        this.genres = response.data.genres;
+      });
+  },
   methods: {
     getResults: function () {
       if (this.searchInput != '') {
@@ -78,7 +86,44 @@ var app = new Vue({
       } else {
         return './img/placeholder.png';
       }
-    }
+    },
+    showBigCard: function (object) {
+      if (object.title) {
+        axios.get(`${this.uri}/movie/${object.id}/credits?api_key=${this.api_key}`)
+        .then((response) => {
+          for (let i = 0; i < 5; i++) {
+            this.cast.push(response.data.cast[i]);
+          }
+        });
+      } else {
+        axios.get(`${this.uri}/tv/${object.id}/credits?api_key=${this.api_key}`)
+        .then((response) => {
+          for (let i = 0; i < 5; i++) {
+            this.cast.push(response.data.cast[i]);
+          }
+        });
+      }
+
+      let movieGenres = this.genres.filter((item) => object.genre_ids.includes(item.id));
+      movieGenres.forEach((item, i) => {
+        this.cardGenres.push(item.name);
+      });
+    },
+    actorName: function (index) {
+      if (index !== this.cast.length - 1) {
+        return `${this.cast[index].name},`;
+      } else {
+        return this.cast[index].name;
+      }
+   },
+   getGenre: function (index) {
+     if (index !== this.cardGenres.length - 1) {
+       return `${this.cardGenres[index]},`;
+     } else {
+       return this.cardGenres[index];
+     }
+   },
+
   },
 
 });
