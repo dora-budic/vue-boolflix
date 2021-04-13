@@ -28,18 +28,18 @@
             <div class="card" v-for="result in searchResults">
               <div>
                 <span>Titolo:</span>
-                <span>{{result.title}}</span>
+                <span>{{getTitle(result)}}</span>
               </div>
-              <div v-if="result.original_title != result.title">
+              <div v-if="getTitle(result) != getOriginalTitle(result)">
                 <span>Titolo originale:</span>
-                <span>{{result.original_title}}</span>
+                <span>{{getOriginalTitle(result)}}</span>
               </div>
               <div class="language">
                 <span>Lingua:</span>
-                <img :src="`./img/${result.original_language}.png`"
-                v-if="flags.includes(result.original_language)"
-                alt="language flag">
-                <span v-else>{{result.original_language}}</span>
+                <img :src="`https://www.unknown.nu/flags/images/${result.original_language}-100`"
+                @error="hideImage"
+                :alt="`${result.original_language} language flag`">
+                <span class="hide">{{result.original_language}}</span>
               </div>
               <div>
                 <span>Voto:</span>
