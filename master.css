@@ -103,6 +103,7 @@ header ul > li {
   flex-basis: 230px;
   max-height: 345px;
   position: relative;
+  cursor: pointer;
 }
 
 #results .card .poster {
@@ -135,6 +136,14 @@ header ul > li {
 
 #results .card:hover .info {
   display: flex;
+}
+
+#results .card .info .more-info {
+  color: #fff;
+  font-size: 32px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
 }
 
 #results .card .info > div, .big-card .bc-info .bc-text > div {
