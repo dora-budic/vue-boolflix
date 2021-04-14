@@ -55,10 +55,7 @@
               </div>
               <div>
                 <span>Voto:</span>
-                <span>
-                  <i class="fas fa-star" v-for="vote in vote(result)"></i>
-                  <i class="far fa-star" v-for="vote in (5 - vote(result))"></i>
-                </span>
+                <span v-html="getVote(result.vote_average)"></span>
               </div>
               <div class="overview" v-if="result.overview">
                 <span>Overview:</span>

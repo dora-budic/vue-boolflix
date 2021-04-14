@@ -67,18 +67,17 @@ var app = new Vue({
         return object.original_name;
       }
     },
-    vote: function (object) {
-      if (object.vote_average <= 2) {
-        return 1;
-      } else if (object.vote_average >= 2 && object.vote_average <= 4) {
-        return 2;
-      } else if (object.vote_average >= 4 && object.vote_average <= 6){
-        return 3;
-      } else if (object.vote_average >= 6 && object.vote_average <= 8) {
-        return 4;
-      } else {
-        return 5;
+    getVote: function (vote) {
+      let filledStars = '';
+      let emptyStars = '';
+      for (var i = 1; i <= 5; i++) {
+        if (i <= Math.round(vote / 2)) {
+          filledStars += '<i class="fas fa-star"></i>';
+        } else {
+          emptyStars += '<i class="far fa-star"></i>';
+        }
       }
+      return `${filledStars}${emptyStars}`;
     },
     changePoster: function (object) {
       if (object.poster_path) {
