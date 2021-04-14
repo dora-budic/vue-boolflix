@@ -86,19 +86,23 @@ var app = new Vue({
         return './img/placeholder.png';
       }
     },
-    showBigCard: function (object) {
+    getInfo: function (object) {
       if (object.title) {
         axios.get(`${this.uri}/movie/${object.id}/credits?api_key=${this.api_key}`)
         .then((response) => {
           for (let i = 0; i < 5; i++) {
-            this.cast.push(response.data.cast[i]);
+            if (response.data.cast[i] != undefined) {
+              this.cast.push(response.data.cast[i].name);
+            }
           }
         });
       } else {
         axios.get(`${this.uri}/tv/${object.id}/credits?api_key=${this.api_key}`)
         .then((response) => {
           for (let i = 0; i < 5; i++) {
-            this.cast.push(response.data.cast[i]);
+            if (response.data.cast[i] != undefined) {
+              this.cast.push(response.data.cast[i].name);
+            }
           }
         });
       }
@@ -108,13 +112,15 @@ var app = new Vue({
         this.cardGenres.push(item.name);
       });
     },
+    // Scrivo la virgola dopo tutti i nomi tranne dopo l'ultimo
     actorName: function (index) {
       if (index !== this.cast.length - 1) {
-        return `${this.cast[index].name},`;
+        return `${this.cast[index]},`;
       } else {
-        return this.cast[index].name;
+        return this.cast[index];
       }
    },
+   // Scrivo la virgola dopo tutti i generi tranne dopo l'ultimo
    getGenre: function (index) {
      if (index !== this.cardGenres.length - 1) {
        return `${this.cardGenres[index]},`;
@@ -122,7 +128,10 @@ var app = new Vue({
        return this.cardGenres[index];
      }
    },
-
+   closeBigCard: function () {
+     this.cast = [];
+     this.cardGenres = [];
+   }
   },
 
 });

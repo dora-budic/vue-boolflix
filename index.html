@@ -30,8 +30,8 @@
         <!-- Card di film/serie -->
         <div id="results">
           <!-- Poster del film -->
-          <div class="card" v-if="cast.length == 0" v-for="result in searchResults"
-          @click="showBigCard(result)">
+          <div class="card" v-for="result in searchResults"
+          @click="getInfo(result)">
             <div class="poster"
             :style="`background-image:url('${changePoster(result)}')`">
             </div>
@@ -65,17 +65,21 @@
           </div>
 
           <!-- Card con poster e tutte le info -->
-          <div id="big-card" v-if="cast.length != 0">
-            <i class="far fa-arrow-alt-circle-left"></i>
-            <div class="actors">
-              <span>Cast:</span>
-              <span v-for="(actor,i) in cast">{{actorName(i)}}</span>
+            <div class="big-card" v-if="cast.length != 0 || cardGenres.length != 0">
+              <div class="inner">
+                <i class="far fa-arrow-alt-circle-left"
+                  @click="closeBigCard">
+                </i>
+                <div class="actors">
+                  <span>Cast:</span>
+                  <span v-for="(actor,i) in cast">{{actorName(i)}}</span>
+                </div>
+                <div class="genres">
+                  <span>Genres:</span>
+                  <span v-for="(genre,i) in cardGenres">{{getGenre(i)}}</span>
+                </div>
+              </div>
             </div>
-            <div class="genres">
-              <span>Genres:</span>
-              <span v-for="(genre,i) in cardGenres">{{getGenre(i)}}</span>
-            </div>
-          </div>
 
           <!-- Alert message -->
           <div class="message" :class="(noResults) ? 'show' : 'hide'">
