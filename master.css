@@ -23,7 +23,6 @@ header h1 {
   color: #E50914;
 }
 
-
 header .chategory {
   display: flex;
   align-items: center;
@@ -127,6 +126,11 @@ header ul > li {
   height: 100%;
   padding: 10px 20px;
   display: none;
+}
+
+#results .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 5px 3px #000;
 }
 
 #results .card:hover .info {

@@ -24,9 +24,31 @@ var app = new Vue({
   mounted () {
     axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
       .then((response) => {
-        this.genres = response.data.genres;
-        // console.log(this.genres);
+        this.genres = [...response.data.genres];
       });
+    axios.get(`${this.uri}/genre/tv/list?api_key=${this.api_key}`)
+    .then((response) => {
+      let movieGen = [];
+      for (var i = 0; i < this.genres.length; i++) {
+        movieGen.push(this.genres[i].name);
+      }
+      response.data.genres.forEach((item, i) => {
+          if (!movieGen.includes(item.name)) {
+            this.genres.push(item);
+          }
+      });
+      this.genres.sort(function(a, b) {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    });
   },
   computed: {
     showResults: function () {
