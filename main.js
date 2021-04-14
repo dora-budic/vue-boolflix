@@ -11,6 +11,7 @@ var app = new Vue({
     tvResults: [],
     searchResults: [],
     noResults: false,
+    selectedFilm: null,
     cast: [],
     genres: [],
     cardGenres: [],
@@ -38,7 +39,7 @@ var app = new Vue({
       this.chategory = e.target.innerHTML;
     },
     getResults: function () {
-      this.chategory = 'All';      
+      this.chategory = 'All';
       if (this.searchInput != '') {
         let movieRequest = `${this.uri}/search/movie?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
         let tvRequest = `${this.uri}/search/tv?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
@@ -103,6 +104,8 @@ var app = new Vue({
       }
     },
     getInfo: function (object) {
+      this.selectedFilm = this.showResults.indexOf(object);
+
       if (object.title) {
         axios.get(`${this.uri}/movie/${object.id}/credits?api_key=${this.api_key}`)
         .then((response) => {
