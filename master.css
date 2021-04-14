@@ -17,8 +17,30 @@ header {
   justify-content: space-between;
 }
 
+header h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 50px;
+  color: #E50914;
+}
+
+
+header .chategory {
+  display: flex;
+  align-items: center;
+}
+
+header .chategory select {
+  outline: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 5px;
+  border-radius: 30px;
+  color: #E50914;
+  font-size: 16px;
+}
+
 header ul {
   list-style: none;
+  margin-right: 20px;
 }
 
 header ul > li {
@@ -30,13 +52,6 @@ header ul > li {
   font-size: 20px;
   cursor: pointer;
 }
-
-header h1 {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 50px;
-  color: #E50914;
-}
-
 
 #searchbar input {
   width: 330px;
@@ -65,11 +80,22 @@ header h1 {
   background-color: #151315;
   min-height: calc(100vh - 80px);
   display: flex;
+  /* flex-direction: column; */
   flex-wrap: wrap;
   justify-content: center;
   padding: 60px 15px;
   position: relative;
 }
+
+/* #results .all-genres {
+  color: #fff;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 24px;
+  color: #E50914;
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+} */
 
 #results .card {
   margin: 0 10px 30px;

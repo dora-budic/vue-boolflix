@@ -9,28 +9,51 @@ var app = new Vue({
     lang: 'it',
     movieResults: [],
     tvResults: [],
-    searchResults: [],
+    allResults: [],
     noResults: false,
     selectedFilm: null,
     cast: [],
     genres: [],
     cardGenres: [],
     chategory: 'All',
+    selectGenre: '',
+    filteredAll: [],
+    filteredMovies: [],
+    filteredTv: []
   },
   mounted () {
     axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
       .then((response) => {
         this.genres = response.data.genres;
+        // console.log(this.genres);
       });
   },
   computed: {
-    showResults: function (e) {
+    showResults: function () {
       if (this.chategory == 'All') {
-        return this.searchResults;
+        if (this.selectGenre != '') {
+          this.filteredAll = this.allResults.filter((item) =>
+          item.genre_ids.includes(this.selectGenre))
+          return this.filteredAll;
+        } else {
+          return this.allResults;
+        }
       } else if (this.chategory == 'Movies') {
-        return this.movieResults;
+        if (this.selectGenre != '') {
+          this.filteredMovies = this.movieResults.filter((item) =>
+          item.genre_ids.includes(this.selectGenre))
+          return this.filteredMovies;
+        } else {
+          return this.movieResults;
+        }
       } else {
-        return this.tvResults;
+        if (this.selectGenre != '') {
+          this.filteredTv = this.tvResults.filter((item) =>
+          item.genre_ids.includes(this.selectGenre))
+          return this.filteredTv;
+        } else {
+          return this.tvResults;
+        }
       }
     }
   },
@@ -49,20 +72,20 @@ var app = new Vue({
             this.tvResults = responses[1].data.results;
             let allResults = [...this.movieResults,...this.tvResults];
             if (allResults.length != 0) {
-              this.searchResults = allResults;
+              this.allResults = allResults;
               this.searchInput = '';
               this.noResults = false;
             } else {
-              this.searchResults = [];
+              this.allResults = [];
               this.searchInput = '';
               this.noResults = true;
             }
           }));
       } else {
-        this.searchResults = [];
+        this.allResults = [];
         this.noResults = true;
       }
-      if (this.searchResults.length == 0) {
+      if (this.allResults.length == 0) {
         this.noResults = true;
       }
     },

@@ -23,6 +23,10 @@
             <li @click="selectChategory">Movies</li>
             <li @click="selectChategory">Series</li>
           </ul>
+          <select name="genre" v-model="selectGenre">
+            <option value="">All</option>
+            <option :value="genre.id" v-for="genre in genres">{{genre.name}}</option>
+          </select>
         </div>
         <div id="searchbar">
           <input type="text" name="search" placeholder="Search for a movie, tv show, person..."
@@ -36,40 +40,44 @@
       <main>
         <!-- Card di film/serie -->
         <div id="results">
-          <!-- Poster del film -->
-          <div class="card" v-for="result in showResults"
-          @click="getInfo(result)">
-            <div class="poster"
-            :style="`background-image:url('${changePoster(result)}')`">
+          <!-- <div class="all-genres" v-for="genre in genres"> -->
+            <!-- <div>{{genre.name}}</div> -->
+            <!-- Poster del film -->
+            <div class="card" v-for="result in showResults"
+            @click="getInfo(result)">
+              <div class="poster"
+              :style="`background-image:url('${changePoster(result)}')`">
+              </div>
+
+              <!-- Informazioni sul film-->
+              <div class="info">
+                <div>
+                  <span>Title:</span>
+                  <span>{{getTitle(result)}}</span>
+                </div>
+                <div v-if="getTitle(result) != getOriginalTitle(result)">
+                  <span>Original title:</span>
+                  <span>{{getOriginalTitle(result)}}</span>
+                </div>
+                <div class="language">
+                  <span>Language:</span>
+                  <img :src="`https://www.unknown.nu/flags/images/${result.original_language}-100`"
+                  @error="hideImage"
+                  :alt="`${result.original_language} language flag`">
+                  <span class="hide">{{result.original_language}}</span>
+                </div>
+                <div>
+                  <span>Vote:</span>
+                  <span v-html="getVote(result.vote_average)"></span>
+                </div>
+                <div class="overview" v-if="result.overview">
+                  <span>Overview:</span>
+                  <span>{{result.overview}}</span>
+                </div>
+              </div>
             </div>
 
-            <!-- Informazioni sul film-->
-            <div class="info">
-              <div>
-                <span>Title:</span>
-                <span>{{getTitle(result)}}</span>
-              </div>
-              <div v-if="getTitle(result) != getOriginalTitle(result)">
-                <span>Original title:</span>
-                <span>{{getOriginalTitle(result)}}</span>
-              </div>
-              <div class="language">
-                <span>Language:</span>
-                <img :src="`https://www.unknown.nu/flags/images/${result.original_language}-100`"
-                @error="hideImage"
-                :alt="`${result.original_language} language flag`">
-                <span class="hide">{{result.original_language}}</span>
-              </div>
-              <div>
-                <span>Vote:</span>
-                <span v-html="getVote(result.vote_average)"></span>
-              </div>
-              <div class="overview" v-if="result.overview">
-                <span>Overview:</span>
-                <span>{{result.overview}}</span>
-              </div>
-            </div>
-          </div>
+          <!-- </div> -->
 
           <!-- Card con poster e tutte le info -->
             <div class="big-card" v-if="cast.length != 0 || cardGenres.length != 0">
