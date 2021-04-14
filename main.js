@@ -22,10 +22,12 @@ var app = new Vue({
     filteredTv: []
   },
   mounted () {
+    // Prendo generi di film
     axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
       .then((response) => {
         this.genres = [...response.data.genres];
       });
+    // Prendo generi di serie
     axios.get(`${this.uri}/genre/tv/list?api_key=${this.api_key}`)
     .then((response) => {
       let movieGen = [];
@@ -37,6 +39,7 @@ var app = new Vue({
             this.genres.push(item);
           }
       });
+      // Generi nell'ordine alfabetico
       this.genres.sort(function(a, b) {
         var nameA = a.name.toUpperCase();
         var nameB = b.name.toUpperCase();
@@ -51,6 +54,7 @@ var app = new Vue({
     });
   },
   computed: {
+    // Torna array di film/serie in base alla categoria e genere
     showResults: function () {
       if (this.chategory == 'All') {
         if (this.selectGenre != '') {
@@ -80,11 +84,13 @@ var app = new Vue({
     }
   },
   methods: {
+    // Prendome il nome della categoria scelta dall'utente
     selectChategory: function (e) {
       this.chategory = e.target.innerHTML;
     },
     getResults: function () {
       this.chategory = 'All';
+      // Prendo i risultati della ricerca
       if (this.searchInput != '') {
         let movieRequest = `${this.uri}/search/movie?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
         let tvRequest = `${this.uri}/search/tv?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
@@ -111,10 +117,12 @@ var app = new Vue({
         this.noResults = true;
       }
     },
+    // Nascondo l'imagine della bandiera se non esiste e mostro il testo
     hideImage: function (e) {
       e.target.style.display = 'none';
       e.target.nextElementSibling.style.display = 'block';
     },
+    // Prendo il titolo del film o serie
     getTitle: function (object) {
       if (object.title) {
         return object.title;
@@ -122,6 +130,7 @@ var app = new Vue({
         return object.name;
       }
     },
+    // Prendo il titolo originale del film o serie
     getOriginalTitle: function (object) {
       if (object.original_title) {
         return object.original_title;
@@ -129,6 +138,7 @@ var app = new Vue({
         return object.original_name;
       }
     },
+    // Prendo il voto e lo trasformo in stelline
     getVote: function (vote) {
       let filledStars = '';
       let emptyStars = '';
@@ -141,6 +151,7 @@ var app = new Vue({
       }
       return `${filledStars}${emptyStars}`;
     },
+    // Dimostro l'imagine placeholder se non esiste il poster
     changePoster: function (object) {
       if (object.poster_path) {
         return `https://image.tmdb.org/t/p/w342${object.poster_path}`;
@@ -151,6 +162,7 @@ var app = new Vue({
     getInfo: function (object) {
       this.selectedFilm = this.showResults.indexOf(object);
 
+      // Prendo i nomi degli attori in base al categoria film o serie
       if (object.title) {
         axios.get(`${this.uri}/movie/${object.id}/credits?api_key=${this.api_key}`)
         .then((response) => {
@@ -171,6 +183,7 @@ var app = new Vue({
         });
       }
 
+      // Prendo i generi nei quali appartiene il film/serie
       let movieGenres = this.genres.filter((item) => object.genre_ids.includes(item.id));
       movieGenres.forEach((item, i) => {
         this.cardGenres.push(item.name);
@@ -192,6 +205,7 @@ var app = new Vue({
        return this.cardGenres[index];
      }
    },
+   // Le azioni nel momento della chiusura della card grossa
    closeBigCard: function () {
      this.cast = [];
      this.cardGenres = [];

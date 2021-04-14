@@ -38,97 +38,91 @@
       </header>
 
       <main>
-        <!-- Card di film/serie -->
         <div id="results">
-          <!-- <div class="all-genres" v-for="genre in genres"> -->
-            <!-- <div>{{genre.name}}</div> -->
-            <!-- Poster del film -->
-            <div class="card" v-for="result in showResults"
-            @click="getInfo(result)">
-              <div class="poster"
-              :style="`background-image:url('${changePoster(result)}')`">
-              </div>
-
-              <!-- Informazioni sul film-->
-              <div class="info">
-                <div class="more-info">
-                  <i class="fas fa-info-circle"></i>
-                </div>
-                <div>
-                  <span>Title:</span>
-                  <span>{{getTitle(result)}}</span>
-                </div>
-                <div v-if="getTitle(result) != getOriginalTitle(result)">
-                  <span>Original title:</span>
-                  <span>{{getOriginalTitle(result)}}</span>
-                </div>
-                <div class="language">
-                  <span>Language:</span>
-                  <img :src="`https://www.unknown.nu/flags/images/${result.original_language}-100`"
-                  @error="hideImage"
-                  :alt="`${result.original_language} language flag`">
-                  <span class="hide">{{result.original_language}}</span>
-                </div>
-                <div>
-                  <span>Vote:</span>
-                  <span v-html="getVote(result.vote_average)"></span>
-                </div>
-                <div class="overview" v-if="result.overview">
-                  <span>Overview:</span>
-                  <span>{{result.overview}}</span>
-                </div>
-              </div>
+          <div class="card" v-for="result in showResults"
+          @click="getInfo(result)">
+            <div class="poster"
+            :style="`background-image:url('${changePoster(result)}')`">
             </div>
 
-          <!-- </div> -->
+            <!-- Informazioni sul film-->
+            <div class="info">
+              <div class="more-info">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <div>
+                <span>Title:</span>
+                <span>{{getTitle(result)}}</span>
+              </div>
+              <div v-if="getTitle(result) != getOriginalTitle(result)">
+                <span>Original title:</span>
+                <span>{{getOriginalTitle(result)}}</span>
+              </div>
+              <div class="language">
+                <span>Language:</span>
+                <img :src="`https://www.unknown.nu/flags/images/${result.original_language}-100`"
+                @error="hideImage"
+                :alt="`${result.original_language} language flag`">
+                <span class="hide">{{result.original_language}}</span>
+              </div>
+              <div>
+                <span>Vote:</span>
+                <span v-html="getVote(result.vote_average)"></span>
+              </div>
+              <div class="overview" v-if="result.overview">
+                <span>Overview:</span>
+                <span>{{result.overview}}</span>
+              </div>
+            </div>
+          </div>
 
-          <!-- Card con poster e tutte le info -->
-            <div class="big-card" v-if="cast.length != 0 || cardGenres.length != 0">
-              <div class="inner">
-                <i class="far fa-arrow-alt-circle-left"
-                  @click="closeBigCard">
-                </i>
-                <div class="bc-info">
-                  <div class="bc-image">
-                    <img :src="`${changePoster(showResults[selectedFilm])}`" alt="poster">
+        <!-- Card con poster e tutte le info -->
+          <div class="big-card" v-if="cast.length != 0 || cardGenres.length != 0">
+            <div class="inner">
+              <i class="far fa-arrow-alt-circle-left"
+                @click="closeBigCard">
+              </i>
+              <div class="bc-info">
+                <div class="bc-image">
+                  <img :src="`${changePoster(showResults[selectedFilm])}`" alt="poster">
+                </div>
+                <div class="bc-text">
+                  <div>
+                    <span>Title:</span>
+                    <span>{{getTitle(showResults[selectedFilm])}}</span>
                   </div>
-                  <div class="bc-text">
-                    <div>
-                      <span>Title:</span>
-                      <span>{{getTitle(showResults[selectedFilm])}}</span>
-                    </div>
-                    <div v-if="getTitle(showResults[selectedFilm]) != getOriginalTitle(showResults[selectedFilm])">
-                      <span>Original title:</span>
-                      <span>{{getOriginalTitle(showResults[selectedFilm])}}</span>
-                    </div>
-                    <div class="language">
-                      <span>Language:</span>
-                      <img :src="`https://www.unknown.nu/flags/images/${showResults[selectedFilm].original_language}-100`"
-                      @error="hideImage"
-                      :alt="`${showResults[selectedFilm].original_language} language flag`">
-                      <span class="hide">{{showResults[selectedFilm].original_language}}</span>
-                    </div>
-                    <div>
-                      <span>Vote:</span>
-                      <span v-html="getVote(showResults[selectedFilm].vote_average)"></span>
-                      <span>{{showResults[selectedFilm].vote_count}} votes</span>
-                    </div>
-                    <div class="actors">
-                      <span>Actors:</span>
-                      <span v-for="(actor,i) in cast">{{actorName(i)}}</span>
-                    </div>
-                    <div class="genres">
-                      <span>Genre:</span>
-                      <span v-for="(genre,i) in cardGenres">{{getGenre(i)}}</span>
-                    </div>
-                    <div class="overview" v-if="showResults[selectedFilm].overview">
-                      <span>Overview:</span>
-                      <span>{{showResults[selectedFilm].overview}}</span>
-                    </div>
+                  <div v-if="getTitle(showResults[selectedFilm]) != getOriginalTitle(showResults[selectedFilm])">
+                    <span>Original title:</span>
+                    <span>{{getOriginalTitle(showResults[selectedFilm])}}</span>
+                  </div>
+                  <div class="language">
+                    <span>Language:</span>
+                    <img :src="`https://www.unknown.nu/flags/images/${showResults[selectedFilm].original_language}-100`"
+                    @error="hideImage"
+                    :alt="`${showResults[selectedFilm].original_language} language flag`">
+                    <span class="hide">{{showResults[selectedFilm].original_language}}</span>
+                  </div>
+                  <div>
+                    <span>Vote:</span>
+                    <span v-html="getVote(showResults[selectedFilm].vote_average)"></span>
+                    <span>{{showResults[selectedFilm].vote_count}} votes</span>
+                  </div>
+                  <div class="actors">
+                    <span>Actors:</span>
+                    <span v-for="(actor,i) in cast">{{actorName(i)}}</span>
+                  </div>
+                  <div class="genres">
+                    <span>Genre:</span>
+                    <span v-for="(genre,i) in cardGenres">{{getGenre(i)}}</span>
+                  </div>
+                  <div class="overview" v-if="showResults[selectedFilm].overview">
+                    <span>Overview:</span>
+                    <span>{{showResults[selectedFilm].overview}}</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
           <!-- Alert message -->
           <div class="message" :class="(noResults) ? 'show' : 'hide'">
