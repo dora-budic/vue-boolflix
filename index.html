@@ -17,6 +17,13 @@
       <!-- Logo, searchbar -->
       <header>
         <h1>Boolflix</h1>
+        <div class="chategory">
+          <ul>
+            <li @click="selectChategory">All</li>
+            <li @click="selectChategory">Movies</li>
+            <li @click="selectChategory">Series</li>
+          </ul>
+        </div>
         <div id="searchbar">
           <input type="text" name="search" placeholder="Search for a movie, tv show, person..."
           v-model="searchInput"
@@ -30,7 +37,7 @@
         <!-- Card di film/serie -->
         <div id="results">
           <!-- Poster del film -->
-          <div class="card" v-for="result in searchResults"
+          <div class="card" v-for="result in showResults"
           @click="getInfo(result)">
             <div class="poster"
             :style="`background-image:url('${changePoster(result)}')`">

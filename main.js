@@ -13,7 +13,8 @@ var app = new Vue({
     noResults: false,
     cast: [],
     genres: [],
-    cardGenres: []
+    cardGenres: [],
+    chategory: 'All',
   },
   mounted () {
     axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
@@ -21,8 +22,23 @@ var app = new Vue({
         this.genres = response.data.genres;
       });
   },
+  computed: {
+    showResults: function (e) {
+      if (this.chategory == 'All') {
+        return this.searchResults;
+      } else if (this.chategory == 'Movies') {
+        return this.movieResults;
+      } else {
+        return this.tvResults;
+      }
+    }
+  },
   methods: {
+    selectChategory: function (e) {
+      this.chategory = e.target.innerHTML;
+    },
     getResults: function () {
+      this.chategory = 'All';      
       if (this.searchInput != '') {
         let movieRequest = `${this.uri}/search/movie?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
         let tvRequest = `${this.uri}/search/tv?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
@@ -131,7 +147,8 @@ var app = new Vue({
    closeBigCard: function () {
      this.cast = [];
      this.cardGenres = [];
-   }
+   },
+
   },
 
 });

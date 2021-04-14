@@ -17,6 +17,20 @@ header {
   justify-content: space-between;
 }
 
+header ul {
+  list-style: none;
+}
+
+header ul > li {
+  display: inline-block;
+  font-family: 'Bebas Neue', cursive;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 header h1 {
   font-family: 'Bebas Neue', cursive;
   font-size: 50px;
