@@ -83,6 +83,10 @@ header ul > li:hover {
   color: #E50914;
 }
 
+header ul > li.active {
+  color: #E50914;
+}
+
 #searchbar input {
   width: 260px;
   padding: 10px 26px;
