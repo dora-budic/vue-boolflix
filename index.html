@@ -16,7 +16,10 @@
     <div id="root">
       <!-- Logo, searchbar -->
       <header>
-        <h1>Boolflix</h1>
+        <div class="title">
+          <h1 @click="homePage">Boolflix</h1>
+          <i class="fas fa-home" @click="homePage"></i>
+        </div>
         <div class="chategory">
           <ul>
             <li @click="selectChategory">All</li>
@@ -38,6 +41,7 @@
       </header>
 
       <main>
+        <h1>{{resultsTitle()}}</h1>
         <div id="results">
           <div class="card" v-for="result in showResults"
           @click="getInfo(result)">

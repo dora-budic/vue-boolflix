@@ -27,9 +27,26 @@ header {
   justify-content: space-between;
 }
 
-header h1 {
+header > .title {
+  display: flex;
+  align-items: center;
+}
+
+header > .title h1 {
   font-family: 'Bebas Neue', cursive;
   font-size: 50px;
+  color: #E50914;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+header > .title i {
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+header > .title i:hover {
   color: #E50914;
 }
 
@@ -62,6 +79,10 @@ header ul > li {
   cursor: pointer;
 }
 
+header ul > li:hover {
+  color: #E50914;
+}
+
 #searchbar input {
   width: 330px;
   padding: 10px 26px;
@@ -86,13 +107,21 @@ header ul > li {
 }
 
 /* MAIN - CARD PICCOLA */
-#results {
+main {
   background-color: #151315;
+}
+
+main h1 {
+  color: #fff;
+  padding: 30px;
+}
+
+#results {
   min-height: calc(100vh - 80px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 60px 15px;
+  padding: 0 15px 30px;
   position: relative;
 }
 

@@ -7,6 +7,10 @@ var app = new Vue({
     uri: 'https://api.themoviedb.org/3',
     api_key: '76ba2aae3375d8d4f8e6654f74fad328',
     lang: 'it',
+    firstPage: true,
+    popularMovies: [],
+    popularSeries: [],
+    popularAll: [],
     movieResults: [],
     tvResults: [],
     allResults: [],
@@ -22,6 +26,19 @@ var app = new Vue({
     filteredTv: []
   },
   mounted () {
+    // Prendo i film popolari
+    axios.get(`${this.uri}/movie/popular?api_key=${this.api_key}&language=${this.lang}`)
+      .then((response) => {
+        this.popularMovies = [...response.data.results];
+      });
+
+    // Prendo le serie popolari
+    axios.get(`${this.uri}/tv/popular?api_key=${this.api_key}&language=${this.lang}`)
+      .then((response) => {
+        this.popularSeries = [...response.data.results];
+        this.popularAll = [...this.popularMovies, ...this.popularSeries];
+      });
+
     // Prendo generi di film
     axios.get(`${this.uri}/genre/movie/list?api_key=${this.api_key}`)
       .then((response) => {
@@ -56,29 +73,57 @@ var app = new Vue({
   computed: {
     // Torna array di film/serie in base alla categoria e genere
     showResults: function () {
-      if (this.chategory == 'All') {
-        if (this.selectGenre != '') {
-          this.filteredAll = this.allResults.filter((item) =>
-          item.genre_ids.includes(this.selectGenre))
-          return this.filteredAll;
+      if (this.firstPage) {
+        if (this.chategory == 'All') {
+          if (this.selectGenre != '') {
+            this.filteredAll = this.popularAll.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredAll;
+          } else {
+            return this.popularAll;
+          }
+        } else if (this.chategory == 'Movies') {
+          if (this.selectGenre != '') {
+            this.filteredMovies = this.popularMovies.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredMovies;
+          } else {
+            return this.popularMovies;
+          }
         } else {
-          return this.allResults;
-        }
-      } else if (this.chategory == 'Movies') {
-        if (this.selectGenre != '') {
-          this.filteredMovies = this.movieResults.filter((item) =>
-          item.genre_ids.includes(this.selectGenre))
-          return this.filteredMovies;
-        } else {
-          return this.movieResults;
+          if (this.selectGenre != '') {
+            this.filteredTv = this.popularSeries.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredTv;
+          } else {
+            return this.popularSeries;
+          }
         }
       } else {
-        if (this.selectGenre != '') {
-          this.filteredTv = this.tvResults.filter((item) =>
-          item.genre_ids.includes(this.selectGenre))
-          return this.filteredTv;
+        if (this.chategory == 'All') {
+          if (this.selectGenre != '') {
+            this.filteredAll = this.allResults.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredAll;
+          } else {
+            return this.allResults;
+          }
+        } else if (this.chategory == 'Movies') {
+          if (this.selectGenre != '') {
+            this.filteredMovies = this.movieResults.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredMovies;
+          } else {
+            return this.movieResults;
+          }
         } else {
-          return this.tvResults;
+          if (this.selectGenre != '') {
+            this.filteredTv = this.tvResults.filter((item) =>
+            item.genre_ids.includes(this.selectGenre))
+            return this.filteredTv;
+          } else {
+            return this.tvResults;
+          }
         }
       }
     }
@@ -87,9 +132,19 @@ var app = new Vue({
     // Prendome il nome della categoria scelta dall'utente
     selectChategory: function (e) {
       this.chategory = e.target.innerHTML;
+      this.selectGenre = '';
     },
+    resultsTitle: function () {
+      if (this.firstPage) {
+        return `Popular - ${this.chategory}`;
+      } else {
+        return `Search results - ${this.chategory}`;
+      }
+    } ,
     getResults: function () {
       this.chategory = 'All';
+      this.selectGenre = '';
+      this.firstPage = false;
       // Prendo i risultati della ricerca
       if (this.searchInput != '') {
         let movieRequest = `${this.uri}/search/movie?api_key=${this.api_key}&query=${this.searchInput}&language=${this.lang}`;
@@ -210,7 +265,11 @@ var app = new Vue({
      this.cast = [];
      this.cardGenres = [];
    },
-
+   homePage: function () {
+     this.firstPage = true;
+     this.chategory = 'All';
+     this.selectGenre = '';
+   }
   },
 
 });
