@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -22,6 +23,11 @@ header {
   background-color: #0C0B0C;
   height: 80px;
   padding: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,6 +36,10 @@ header {
 header > .title {
   display: flex;
   align-items: center;
+}
+
+header > .title a {
+  text-decoration: none;
 }
 
 header > .title h1 {
@@ -113,6 +123,7 @@ header ul > li.active {
 /* MAIN - CARD PICCOLA */
 main {
   background-color: #151315;
+  margin-top: 80px;
 }
 
 main h1 {
