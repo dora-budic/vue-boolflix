@@ -22,12 +22,15 @@
         </div>
         <div class="category">
           <ul>
-            <li @click="selectCategory"
-            :class="(category == 'All') ? 'active' : ''">All</li>
-            <li @click="selectCategory"
-            :class="(category == 'Movies') ? 'active' : ''">Movies</li>
-            <li @click="selectCategory"
-            :class="(category == 'Series') ? 'active' : ''">Series</li>
+            <li :class="(category == 'All') ? 'active' : ''">
+              <a href="#" @click="selectCategory">All</a>
+            </li>
+            <li :class="(category == 'Movies') ? 'active' : ''">
+              <a href="#" @click="selectCategory">Movies</a>
+            </li>
+            <li :class="(category == 'Series') ? 'active' : ''">
+              <a href="#" @click="selectCategory">Series</a>
+            </li>
           </ul>
           <select name="genre" v-model="selectGenre">
             <option value="">All</option>

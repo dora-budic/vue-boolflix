@@ -83,19 +83,24 @@ header ul > li {
   display: inline-block;
   font-family: 'Bebas Neue', cursive;
   text-transform: uppercase;
-  color: #fff;
   margin: 0 15px;
   font-size: 20px;
   cursor: pointer;
 }
 
-header ul > li:hover {
+header ul > li > a {
+  text-decoration: none;
+  color: #fff;
+}
+
+header ul > li:hover a {
   color: #E50914;
 }
 
-header ul > li.active {
+header ul > li.active a {
   color: #E50914;
 }
+
 
 #searchbar input {
   width: 260px;
