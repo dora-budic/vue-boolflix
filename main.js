@@ -19,7 +19,7 @@ var app = new Vue({
     cast: [],
     genres: [],
     cardGenres: [],
-    chategory: 'All',
+    category: 'All',
     selectGenre: '',
     filteredAll: [],
     filteredMovies: [],
@@ -74,7 +74,7 @@ var app = new Vue({
     // Torna array di film/serie in base alla categoria e genere
     showResults: function () {
       if (this.firstPage) {
-        if (this.chategory == 'All') {
+        if (this.category == 'All') {
           if (this.selectGenre != '') {
             this.filteredAll = this.popularAll.filter((item) =>
             item.genre_ids.includes(this.selectGenre))
@@ -82,7 +82,7 @@ var app = new Vue({
           } else {
             return this.popularAll;
           }
-        } else if (this.chategory == 'Movies') {
+        } else if (this.category == 'Movies') {
           if (this.selectGenre != '') {
             this.filteredMovies = this.popularMovies.filter((item) =>
             item.genre_ids.includes(this.selectGenre))
@@ -100,7 +100,7 @@ var app = new Vue({
           }
         }
       } else {
-        if (this.chategory == 'All') {
+        if (this.category == 'All') {
           if (this.selectGenre != '') {
             this.filteredAll = this.allResults.filter((item) =>
             item.genre_ids.includes(this.selectGenre))
@@ -108,7 +108,7 @@ var app = new Vue({
           } else {
             return this.allResults;
           }
-        } else if (this.chategory == 'Movies') {
+        } else if (this.category == 'Movies') {
           if (this.selectGenre != '') {
             this.filteredMovies = this.movieResults.filter((item) =>
             item.genre_ids.includes(this.selectGenre))
@@ -130,19 +130,19 @@ var app = new Vue({
   },
   methods: {
     // Prendome il nome della categoria scelta dall'utente
-    selectChategory: function (e) {
-      this.chategory = e.target.innerHTML;
+    selectCategory: function (e) {
+      this.category = e.target.innerHTML;
       this.selectGenre = '';
     },
     resultsTitle: function () {
       if (this.firstPage) {
-        return `Popular - ${this.chategory}`;
+        return `Popular - ${this.category}`;
       } else {
-        return `Search results - ${this.chategory}`;
+        return `Search results - ${this.category}`;
       }
     } ,
     getResults: function () {
-      this.chategory = 'All';
+      this.category = 'All';
       this.selectGenre = '';
       this.firstPage = false;
       // Prendo i risultati della ricerca
@@ -267,7 +267,7 @@ var app = new Vue({
    },
    homePage: function () {
      this.firstPage = true;
-     this.chategory = 'All';
+     this.category = 'All';
      this.selectGenre = '';
    }
   },

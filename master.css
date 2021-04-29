@@ -60,12 +60,12 @@ header > .title i:hover {
   color: #E50914;
 }
 
-header .chategory {
+header .category {
   display: flex;
   align-items: center;
 }
 
-header .chategory select {
+header .category select {
   outline: 0;
   font-family: 'Source Sans Pro', sans-serif;
   padding: 5px;

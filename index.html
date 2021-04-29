@@ -20,14 +20,14 @@
           <a href="#"><h1 @click="homePage">Boolflix</h1></a>
           <a href="#"><i class="fas fa-home" @click="homePage"></i></a>
         </div>
-        <div class="chategory">
+        <div class="category">
           <ul>
-            <li @click="selectChategory"
-            :class="(chategory == 'All') ? 'active' : ''">All</li>
-            <li @click="selectChategory"
-            :class="(chategory == 'Movies') ? 'active' : ''">Movies</li>
-            <li @click="selectChategory"
-            :class="(chategory == 'Series') ? 'active' : ''">Series</li>
+            <li @click="selectCategory"
+            :class="(category == 'All') ? 'active' : ''">All</li>
+            <li @click="selectCategory"
+            :class="(category == 'Movies') ? 'active' : ''">Movies</li>
+            <li @click="selectCategory"
+            :class="(category == 'Series') ? 'active' : ''">Series</li>
           </ul>
           <select name="genre" v-model="selectGenre">
             <option value="">All</option>
